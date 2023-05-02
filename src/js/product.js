@@ -1,6 +1,11 @@
-import { setLocalStorage } from "./utils.mjs";
+import { setLocalStorage, getParam } from "./utils.mjs";
 import { findProductById } from "./productData.mjs";
-import { getParam } from "./utils.mjs";
+
+const productId = getParam("product");
+
+// eslint-disable-next-line no-console
+console.log(findProductById(productId));
+
 
 function addProductToCart(product) {
   setLocalStorage("so-cart", product);
