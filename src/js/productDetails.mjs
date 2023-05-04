@@ -1,7 +1,14 @@
 import { setLocalStorage } from "./utils.mjs";
 import { findProductById } from "./productData.mjs";
 
-// 2. addToCart 
+// 1. productDetails(productId)
+
+export default async function productDetails()
+{
+    
+}
+
+// 2. addToCart()
 function addProductToCart(product) {
     setLocalStorage("so-cart", product);
   }
