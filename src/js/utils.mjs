@@ -45,3 +45,13 @@ export async function renderWithTemplate(templateFn, parentElement, data, callba
       callback(data);
   }
 }
+
+export function loadTemplate(path) {
+  return async function () {
+    const res = await fetch(path);
+    if (res.ok) {
+      const html = await res.text();
+      return html;
+    }
+  };
+}
