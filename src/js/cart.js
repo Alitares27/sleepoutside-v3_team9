@@ -1,5 +1,8 @@
 import { loadHeaderFooter } from "./utils.mjs";
-import { shoppingCart } from "./shoppingCart.mjs";
+import { ShoppingCart } from "./shoppingCart.mjs";
 
 loadHeaderFooter();
-shoppingCart();
+ShoppingCart();
+
+
+
