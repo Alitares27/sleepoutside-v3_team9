@@ -3,6 +3,3 @@ import { ShoppingCart } from "./shoppingCart.mjs";
 
 loadHeaderFooter();
 ShoppingCart();
-
-
-
