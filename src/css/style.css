@@ -132,8 +132,7 @@ button {
 }
 .product-grid h2 {
   margin: 0;
-
-  font-size: 1.2em;
+  font-size: 1.1em;
 }
 .product-grid a {
   text-decoration: none;
@@ -143,7 +142,7 @@ button {
   color: var(--dark-grey);
 }
 .product-grid a:hover {
-  text-decoration: underline;
+  color: var(--secondary-color) ;
 }
 
 .mission {
