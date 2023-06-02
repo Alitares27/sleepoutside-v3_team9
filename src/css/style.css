@@ -166,6 +166,13 @@ button {
   text-decoration: none;
   color: var(--dark-grey);
 }
+
+/* Style to hide cart total by default */
+.hide {
+  display: none;
+}
+
+
 /* Styles for product lists */
 .product-card {
   flex: 1 1 45%;
