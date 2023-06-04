@@ -19,3 +19,13 @@ export async function findProductById(id) {
   return products.find((item) => item.Id === id); // or written as return products.find(function(item) { return item.Id === id; })
 }
 
+export async function checkout(payload) {
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  };
+  return await fetch(baseURL + "checkout/", options).then(convertToJson);
+}
