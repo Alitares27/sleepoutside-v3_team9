@@ -15,10 +15,10 @@ export async function getProductsByCategory(category) {
 }
 
 export async function findProductById(id) {
-  const products = await getProductsByCategory();
-  return products.find((item) => item.Id === id); // or written as return products.find(function(item) { return item.Id === id; })
+  const response = await fetch(baseURL + `product/${id}`);
+  const product = await convertToJson(response);
+  return product.Result;
 }
-
 export async function checkout(payload) {
   const options = {
     method: "POST",
