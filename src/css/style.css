@@ -112,8 +112,6 @@ button {
 
 /* End cart icon styles */
 
-
-
 /* product grid styling*/
 .product-grid {
   list-style-type: none;
@@ -142,7 +140,7 @@ button {
   color: var(--dark-grey);
 }
 .product-grid a:hover {
-  color: var(--secondary-color) ;
+  color: var(--secondary-color);
 }
 
 .mission {
@@ -186,13 +184,13 @@ button {
 .list-footer a:visited {
   color: var(--dark-grey);
 }
-.cart-footer a{
+.cart-footer a {
   background-color: var(--secondary-color);
   padding: 10px;
   color: var(--light-grey);
   text-decoration: none;
 }
-.cart-footer a:hover{
+.cart-footer a:hover {
   background-color: var(--dark-grey);
 }
 
@@ -200,7 +198,7 @@ button {
 .checkout-form {
   padding: 0.5em;
 }
-.checkout-form fieldset{
+.checkout-form fieldset {
   margin: 20px;
 }
 .checkout-form label {
@@ -224,7 +222,6 @@ button {
   width: 25%;
   font-size: 1em;
 }
-
 
 /* Styles for product lists */
 .product-card {
