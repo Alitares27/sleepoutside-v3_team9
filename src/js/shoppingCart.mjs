@@ -1,12 +1,13 @@
 import { getLocalStorage, renderListWithTemplate } from "./utils.mjs";
 
-export function shoppingCart() {
+export default function shoppingCart() {
   const cartItems = getLocalStorage("so-cart");
   const outputEl = document.querySelector(".product-list");
   renderListWithTemplate(cartItemTemplate, outputEl, cartItems);
   const total = calculateListTotal(cartItems);
   displayCartTotal(total);
 }
+
 function displayCartTotal(total) {
   if (total > 0) {
     // show our checkout button and total if there are items in the cart.
