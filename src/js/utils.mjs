@@ -83,7 +83,7 @@ export async function loadHeaderFooter() {
   renderWithTemplate(footerTemplateFn, footerEl);
 }
 
-export function alertMessage(message, scroll = true, duration = 3000){
+export function alertMessage(message, scroll = true){
 
   // Create alert Element
   const alertElement = document.createElement("div");

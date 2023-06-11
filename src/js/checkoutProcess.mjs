@@ -1,20 +1,21 @@
 import {
-  getLocalStorage
+  setLocalStorage,
+  getLocalStorage,
+  alertMessage,
+  removeAllAlerts
 } from "./utils.mjs";
-import {
-  checkout
-} from "./externalServices.mjs";
+import { checkout } from "./externalServices.mjs";
 
 
 function formDataToJSON(formElement) {
   const formData = new FormData(formElement),
-  convertedJSON = {};
+    convertedJSON = {};
 
-formData.forEach(function (value, key) {
-  convertedJSON[key] = value;
-});
+  formData.forEach(function (value, key) {
+    convertedJSON[key] = value;
+  });
 
-return convertedJSON;
+  return convertedJSON;
 }
 
 
@@ -95,10 +96,17 @@ const checkoutProcess = {
     json.tax = this.tax;
     json.items = packageItems(this.list);
     console.log(json);
-    try{
+    try {
       const res = await checkout(json);
       console.log(res);
-    } catch(err){
+      setLocalStorage("so-cart", []);
+      location.assign("/checkout/sucess.html");
+    } catch (err) {
+      // code to get rid of all preexisting alerts.
+      removeAllAlerts();
+      for (let message in err.message) {
+        alertMessage(err.message[message]);
+      }
       console.log(err);
     }
   },
