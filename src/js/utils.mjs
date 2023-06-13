@@ -82,3 +82,33 @@ export async function loadHeaderFooter() {
   renderWithTemplate(headerTemplateFn, headerEl);
   renderWithTemplate(footerTemplateFn, footerEl);
 }
+
+export function alertMessage(message, scroll = true){
+
+  // Create alert Element
+  const alertElement = document.createElement("div");
+  alertElement.classList.add("alert");
+  // set the contents. You should have a message and an X or something the user can click on to remove
+  alertElement.innerHTML = `<p>${message}</p><span>X</span>`;
+  // add a listener to the alert to see if they clicked on the X
+  // if they did then remove the child
+  alert.addEventListener("click", function(e) {
+    if (e.target.tagName === "SPAN") {
+      main.removeChild(this);
+    }
+  });
+
+  // insert alert at the top of the main element
+  const main = document.querySelector("main");
+  main.prepend(alert);
+
+  //scroll to the top of page if scroll is enable
+  if(scroll){
+    window.scrollTo(0, 0);
+  }
+}
+
+export function removeAllAlerts(){
+  const alerts = document.querySelectorAll(".alert");
+  alerts.forEach((alert) => document.querySelector("main").removeChild(alert))
+}
