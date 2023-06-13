@@ -34,29 +34,29 @@ function packageItems(items) {
 
 
 const checkoutProcess = {
-  lskey: "",
-  summarySelector: "",
+  key: "",
+  outputSelector: "",
   list: [],
   itemTotal: 0,
   shipping: 0,
   tax: 0,
   orderTotal: 0,
 
-  init(lskey, summarySelector) {
-    this.lskey = lskey;
-    this.summarySeletor = summarySelector;
-    this.list = getLocalStorage(lskey) || [];
+  init(key, outputSelector) {
+    this.key = key;
+    this.summarySeletor = outputSelector;
+    this.list = getLocalStorage(key) || [];
     this.CalcAndDisplaySubtotal();
   },
 
   calcAndDisplaySubtotal: function () {
     // Calculate and display total amount of items in cart, and the number of items
     const summaryElement = document.querySelector(
-      this.summarySelector + "#cartTotal"
+      this.outputSelector + "#cartTotal"
     );
 
     const itemNumElement = document.querySelector(
-      this.summarySelector + "#num-items"
+      this.outputSelector + "#num-items"
     );
     itemNumElement.innerText = this.list.length;
     // calculate the total of all the items in the cart
@@ -78,9 +78,9 @@ const checkoutProcess = {
 
   displayOrderTotals: function () {
     //dislay totals in the order summary page once they are calculated
-    const shipping = document.querySelector(this.summarySelector + "#shipping");
-    const tax = document.querySelector(this.summarySelector + "#tax");
-    const orderTotal = document.querySelector(this.summarySelector + "#orderTotal");
+    const shipping = document.querySelector(this.outputSelector + "#shipping");
+    const tax = document.querySelector(this.outputSelector + "#tax");
+    const orderTotal = document.querySelector(this.outputSelector + "#orderTotal");
 
     shipping.innerText = "$" + this.shipping;
     tax.innerText = "$" + this.tax;
@@ -99,7 +99,7 @@ const checkoutProcess = {
     try {
       const res = await checkout(json);
       console.log(res);
-      setLocalStorage("so-cart", []);
+      //setLocalStorage("so-cart", []);
       location.assign("/checkout/sucess.html");
     } catch (err) {
       // code to get rid of all preexisting alerts.

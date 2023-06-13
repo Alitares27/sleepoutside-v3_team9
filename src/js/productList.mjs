@@ -6,7 +6,7 @@ function productCardTemplate(product) {
     return `<li class="product-card">
       <a href="/product_pages/index.html?product=${product.Id}">
       <img
-        src="${product.Image}"
+        src="${product.Images.PrimaryMedium}"
         alt="Image of ${product.Name}"/>
       <h3 class="card__brand">${product.Brand.Name}</h3>
       <h2 class="card__name">${product.NameWithoutBrand}</h2>
@@ -14,13 +14,19 @@ function productCardTemplate(product) {
     </li>`;
   }
 
-export async function productList(selector, category) {
+
+export default async function productList(selector, category) {
+  let fourProducts = []
     // get the element we will insert the list into from the selector
    const el = document.querySelector(selector);
     // get the list of products 
    const products = await getProductsByCategory(category);
-   console.log(products);
-    // render out the product list to the element
-   renderListWithTemplate(productCardTemplate, el, products);
+   //console.log(products);
+   for (let i = 0; i < 4; i++) {
+      fourProducts.push(products[i]);
+   }   
+   console.log(fourProducts);
+   // render out the product list to the element
+   renderListWithTemplate(productCardTemplate, el, fourProducts);
    document.querySelector(".title").innerHTML = category;
 }
