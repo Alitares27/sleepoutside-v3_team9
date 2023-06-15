@@ -4,8 +4,7 @@ async function convertToJson(res) {
   if (res.ok) {
     return data;
   } else {
-    throw { name: "servicesError", message: data,
-   };
+    throw { name: 'servicesError', message: jsonResponse };
   }
 }
 
@@ -29,5 +28,5 @@ export async function checkout(payload) {
     },
     body: JSON.stringify(payload),
   };
-  return await fetch(baseURL + "checkout/", options).then(convertToJson);
+  return await fetch(baseURL + "checkout/", options).then(convertToJson());
 }
