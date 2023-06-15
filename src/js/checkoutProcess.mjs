@@ -16,7 +16,6 @@ function formDataToJSON(formElement) {
 
   return convertedJSON;
 }
-
 function packageItems(items) {
   const simplifiedItems = items.map((item) => {
     console.log(item);
