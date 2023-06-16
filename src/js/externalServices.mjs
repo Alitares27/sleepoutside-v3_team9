@@ -1,5 +1,5 @@
 const baseURL =
-  import.meta.env.VITE_SERVER_URL
+"http://server-nodejs.cit.byui.edu:3000/"
 
 function convertToJson(res) {
   // const jsonResponse = await res.json();
