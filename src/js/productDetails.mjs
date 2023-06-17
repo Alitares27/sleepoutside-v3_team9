@@ -1,6 +1,6 @@
 import { findProductById } from "./externalServices.mjs";
 import { setLocalStorage, getLocalStorage } from "./utils.mjs";
-//import {animateCart, cartItemCountUpdate} from "./cartImageAdjuster.js";
+import {animateCart, cartItemCountUpdate} from "./cartImageAdjuster.js";
 
 
 export default async function productDetails(productId) {
@@ -24,8 +24,8 @@ export function addToCart(product) {
   cartItems.push(product);
 
   setLocalStorage("so-cart", cartItems);
-  //animateCart();
-  //cartItemCountUpdate();
+  animateCart();
+  cartItemCountUpdate();
 }
 
 
