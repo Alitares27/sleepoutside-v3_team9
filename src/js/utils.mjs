@@ -12,6 +12,7 @@ export function getLocalStorage(key) {
 // save data to local storage
 export function setLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
+  //save token as so_token
 }
 // set a listener for both touchend and click
 export function setClick(selector, callback) {
@@ -55,33 +56,83 @@ export async function renderWithTemplate(
   }
   const htmlString = await templateFn(data);
   parentElement.insertAdjacentHTML(position, htmlString);
-  if (callback) {
+  if(callback) {
     callback(data);
   }
 }
 
 function loadTemplate(path) {
-  // wait what?  we are returning a new function? this is called currying and can be very helpful.
   return async function () {
-    const res = await fetch(path);
-    if (res.ok) {
+      const res = await fetch(path);
+      if (res.ok) {
       const html = await res.text();
       return html;
-    }
+      }
   };
-}
+} 
 
 export async function loadHeaderFooter() {
-  // header template will still be a function! But one where we have pre-supplied the argument.
-  // headerTemplate and footerTemplate will be almost identical, but they will remember the path we passed in when we created them
-  // why is it important that they stay functions?  The renderWithTemplate function is expecting a template function...if we sent it a string it would break, if we changed it to expect a string then it would become less flexible.
   const headerTemplateFn = loadTemplate("/partials/header.html");
   const footerTemplateFn = loadTemplate("/partials/footer.html");
-  const headerEl = document.querySelector("#main-header");
-  const footerEl = document.querySelector("#main-footer");
+  const headerEl = document.getElementById("main-header");
+  const footerEl = document.getElementById("main-footer");
   renderWithTemplate(headerTemplateFn, headerEl);
   renderWithTemplate(footerTemplateFn, footerEl);
 }
+
+//newsletter
+
+export function initializeNewsletter() {
+  // Create the newsletter sign-up form
+  var newsletterDiv = document.getElementById("newsletter");
+
+  var newslettersignup = document.createElement("p");
+  newslettersignup.textContent = "Sign up for our newsletter!";
+  newslettersignup.classList.add("signup-heading");
+  var form = document.createElement("form");
+  form.id = "newsletterForm";
+
+  var emailInput = document.createElement("input");
+  emailInput.type = "email";
+  emailInput.id = "emailInput";
+  emailInput.placeholder = "Enter your email address";
+  emailInput.required = true;
+
+  var submitButton = document.createElement("input");
+  submitButton.type = "submit";
+  submitButton.value = "Subscribe";
+
+  form.appendChild(emailInput);
+  form.appendChild(submitButton);
+
+  newsletterDiv.appendChild(newslettersignup);
+  newsletterDiv.appendChild(form);
+
+  // Create the popup message
+  var popupDiv = document.getElementById("popup");
+
+  var closeButton = document.createElement("button");
+  closeButton.textContent = "OK";
+  closeButton.classList.add("close-button");
+
+  var thanksMessage = document.createElement("p");
+  thanksMessage.textContent = "Thanks for subscribing!";
+  
+  popupDiv.appendChild(thanksMessage);
+  popupDiv.appendChild(closeButton);
+  
+
+  form.addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent form submission
+
+    popupDiv.style.display = "block";
+  });
+
+  closeButton.addEventListener("click", function() {
+    popupDiv.style.display = "none";
+  });
+}
+
 export function alertMessage(message, scroll = true, duration = 3000) {
   const alert = document.createElement("div");
   alert.classList.add("alert");
@@ -94,9 +145,7 @@ export function alertMessage(message, scroll = true, duration = 3000) {
   });
   const main = document.querySelector("main");
   main.prepend(alert);
-  // make sure they see the alert by scrolling to the top of the window
-  //we may not always want to do this...so default to scroll=true, but allow it to be passed in and overridden.
-  if (scroll) window.scrollTo(0, 0);
+  if (scroll) window.scrollTo(0, 0); 
 }
 
 export function removeAllAlerts() {
