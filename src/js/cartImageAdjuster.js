@@ -37,14 +37,15 @@ export function cartItemCountUpdate() {
 }
 
 export function getTotalItemsInCart() {
-  const cartItems = getLocalStorage("so-cart");
-  let count = 0;
+    const cartItems = getLocalStorage("so-cart");
+    let count = 0;
   
-  if (cartItems !== null) {
-    for (const item of cartItems) {
-      count += item.Quantity;
+    if (cartItems !== null && typeof cartItems[Symbol.iterator] === "function") {
+      for (const item of cartItems) {
+        count += item.Quantity;
+      }
     }
+  
+    return count;
   }
   
-  return count;
-}
