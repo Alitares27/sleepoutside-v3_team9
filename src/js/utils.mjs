@@ -12,7 +12,6 @@ export function getLocalStorage(key) {
 // save data to local storage
 export function setLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
-  //save token as so_token
 }
 // set a listener for both touchend and click
 export function setClick(selector, callback) {
@@ -56,28 +55,53 @@ export async function renderWithTemplate(
   }
   const htmlString = await templateFn(data);
   parentElement.insertAdjacentHTML(position, htmlString);
-  if(callback) {
+  if (callback) {
     callback(data);
   }
 }
 
 function loadTemplate(path) {
+  // wait what?  we are returning a new function? this is called currying and can be very helpful.
   return async function () {
-      const res = await fetch(path);
-      if (res.ok) {
+    const res = await fetch(path);
+    if (res.ok) {
       const html = await res.text();
       return html;
-      }
+    }
   };
-} 
+}
 
 export async function loadHeaderFooter() {
+  // header template will still be a function! But one where we have pre-supplied the argument.
+  // headerTemplate and footerTemplate will be almost identical, but they will remember the path we passed in when we created them
+  // why is it important that they stay functions?  The renderWithTemplate function is expecting a template function...if we sent it a string it would break, if we changed it to expect a string then it would become less flexible.
   const headerTemplateFn = loadTemplate("/partials/header.html");
   const footerTemplateFn = loadTemplate("/partials/footer.html");
-  const headerEl = document.getElementById("main-header");
-  const footerEl = document.getElementById("main-footer");
+  const headerEl = document.querySelector("#main-header");
+  const footerEl = document.querySelector("#main-footer");
   renderWithTemplate(headerTemplateFn, headerEl);
   renderWithTemplate(footerTemplateFn, footerEl);
+}
+export function alertMessage(message, scroll = true, duration = 3000) {
+  const alert = document.createElement("div");
+  alert.classList.add("alert");
+  alert.innerHTML = `<p>${message}</p><span>X</span>`;
+
+  alert.addEventListener("click", function (e) {
+    if (e.target.tagName == "SPAN") {
+      main.removeChild(this);
+    }
+  });
+  const main = document.querySelector("main");
+  main.prepend(alert);
+  // make sure they see the alert by scrolling to the top of the window
+  //we may not always want to do this...so default to scroll=true, but allow it to be passed in and overridden.
+  if (scroll) window.scrollTo(0, 0);
+}
+
+export function removeAllAlerts() {
+  const alerts = document.querySelectorAll(".alert");
+  alerts.forEach((alert) => document.querySelector("main").removeChild(alert));
 }
 
 //newsletter
@@ -131,24 +155,4 @@ export function initializeNewsletter() {
   closeButton.addEventListener("click", function() {
     popupDiv.style.display = "none";
   });
-}
-
-export function alertMessage(message, scroll = true, duration = 3000) {
-  const alert = document.createElement("div");
-  alert.classList.add("alert");
-  alert.innerHTML = `<p>${message}</p><span>X</span>`;
-
-  alert.addEventListener("click", function (e) {
-    if (e.target.tagName == "SPAN") {
-      main.removeChild(this);
-    }
-  });
-  const main = document.querySelector("main");
-  main.prepend(alert);
-  if (scroll) window.scrollTo(0, 0); 
-}
-
-export function removeAllAlerts() {
-  const alerts = document.querySelectorAll(".alert");
-  alerts.forEach((alert) => document.querySelector("main").removeChild(alert));
 }
