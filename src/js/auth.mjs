@@ -1,5 +1,5 @@
 
-import { logInRequest } from "./externalServices.mjs";
+import  { logInRequest }  from "./externalServices.mjs";
 import { alertMessage, getLocalStorage, setLocalStorage } from "./utils.mjs";
 import jwt_decode from "jwt-decode";
 
@@ -35,7 +35,7 @@ function isTokenValid(token){
      //do the following if it not valid
      if(!valid){
         //remove from local storage
-        localStorage.reomoveItem(tokenKey)
+        localStorage.removeItem(tokenKey)
         //get path to current location
         const location = window.location
         //console log current location path to check out what it contains

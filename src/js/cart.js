@@ -1,12 +1,5 @@
-import cartList from "./shoppingCart.mjs";
 import { loadHeaderFooter } from "./utils.mjs";
-import { cartItemCountUpdate } from "./cartImageAdjuster.js";
+import  shoppingCart  from "./shoppingCart.mjs";
 
 loadHeaderFooter();
-cartList();
-cartItemCountUpdate();
-
-
-
-
-
+shoppingCart();
