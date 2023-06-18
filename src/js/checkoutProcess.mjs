@@ -54,7 +54,7 @@ const checkoutProcess = {
     // calculate the total of all the items in the cart
     const amounts = this.list.map((item) => item.FinalPrice);
     this.itemTotal = amounts.reduce((sum, item) => sum + item, 0);
-    summaryElement.innerText = "$" + this.itemTotal;
+    summaryElement.innerText = "$ " + this.itemTotal;
   },
   calculateOrdertotal: function () {
     this.shipping = 10 + (this.list.length - 1) * 2;
@@ -72,9 +72,9 @@ const checkoutProcess = {
     const orderTotal = document.querySelector(
       this.outputSelector + " #orderTotal"
     );
-    shipping.innerText = "$" + this.shipping;
-    tax.innerText = "$" + this.tax;
-    orderTotal.innerText = "$" + this.orderTotal;
+    shipping.innerText = "$ " + this.shipping;
+    tax.innerText = "$ " + this.tax;
+    orderTotal.innerText = "$ " + this.orderTotal;
   },
   checkout: async function (form) {
     const json = formDataToJSON(form);
