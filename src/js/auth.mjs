@@ -1,5 +1,5 @@
 
-import  { logInRequest }  from "./externalServices.mjs";
+import { logInRequest } from "./externalServices.mjs";
 import { alertMessage, getLocalStorage, setLocalStorage } from "./utils.mjs";
 import jwt_decode from "jwt-decode";
 
