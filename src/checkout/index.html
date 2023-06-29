@@ -13,7 +13,7 @@
       <h2>Review & Place your Order</h2>
       <section class="checkout-form">
         <form name="checkout">
-          <fieldset>
+          <fieldset class="checkout-field">
             <legend>Shipping</legend>
             <div class="checkout__name">
               <label for="fname">First Name</label>
@@ -32,14 +32,14 @@
               <input name="zip" id="zip" required />
             </div>
           </fieldset>
-          <fieldset>
+          <fieldset class="checkout-field">
             <legend>Payment</legend>
             <label for="cardNumber">Card number</label>
-            <input name="cardNumber" required type="number" minlength="12" />
+            <input name="cardNumber" required />
             <label for="expiration">Expiration</label>
             <input name="expiration" required />
             <label for="code">Security Code</label>
-            <input name="code" required type="number" minlength="3" />
+            <input name="code" required />
           </fieldset>
           <fieldset class="checkout-summary">
             <legend>Order Summary</legend>

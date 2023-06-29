@@ -41,3 +41,7 @@ function calculateListTotal(list) {
   const total = amounts.reduce((sum, item) => sum + item, 0);
   return total;
 }
+
+
+
+
